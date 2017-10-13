@@ -1,2 +1,4 @@
+com\soul\service\ItemCatService.class
 com\soul\service\ItemServiceImpl.class
 com\soul\service\IItemService.class
+com\soul\service\ItemCatServiceImpl.class

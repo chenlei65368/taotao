@@ -1,2 +1,3 @@
 com\soul\controller\ItemController.class
 com\soul\controller\PageController.class
+com\soul\controller\ItemCatController.class
