@@ -1,4 +1,4 @@
-package com.soul.service;
+package com.soul.service.impl;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.soul.common.utils.FtpUtil;
 import com.soul.common.utils.IDUtils;
+import com.soul.service.IPicService;
 
 @Service
 @Transactional

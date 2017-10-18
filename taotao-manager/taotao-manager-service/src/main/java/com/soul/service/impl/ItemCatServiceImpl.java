@@ -1,4 +1,4 @@
-package com.soul.service;
+package com.soul.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +13,7 @@ import com.soul.mapper.TbItemCatMapper;
 import com.soul.pojo.TbItemCat;
 import com.soul.pojo.TbItemCatExample;
 import com.soul.pojo.TbItemCatExample.Criteria;
+import com.soul.service.ItemCatService;
 
 @Service
 @Transactional

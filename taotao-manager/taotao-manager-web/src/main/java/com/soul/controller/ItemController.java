@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.soul.common.pojo.EUDatagridResult;
 import com.soul.common.pojo.TaotaoResult;
 import com.soul.pojo.TbItem;
+import com.soul.pojo.TbItemParam;
 import com.soul.service.IItemService;
 
 @Controller
@@ -36,9 +37,8 @@ public class ItemController {
 	
 	@RequestMapping(value="/save",method=RequestMethod.POST)
 	@ResponseBody
-	public TaotaoResult itemSave(TbItem item) {
+	public TaotaoResult itemSave(TbItem item,String desc,String itemParams) throws Exception {
 		
-		
-		return itemService.createItem(item);
+		return itemService.createItem(item,desc,itemParams);
 	}
 }
