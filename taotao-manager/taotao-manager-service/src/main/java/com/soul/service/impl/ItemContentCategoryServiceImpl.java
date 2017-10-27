@@ -14,9 +14,8 @@ import com.soul.mapper.TbContentCategoryMapper;
 import com.soul.pojo.TbContentCategory;
 import com.soul.pojo.TbContentCategoryExample;
 import com.soul.pojo.TbContentCategoryExample.Criteria;
-import com.soul.pojo.TbItemCat;
-import com.soul.pojo.TbItemCatExample;
 import com.soul.service.IItemContentCategoryService;
+
 
 
 @Service
@@ -59,14 +58,16 @@ public class ItemContentCategoryServiceImpl implements IItemContentCategoryServi
 		category.setName(name);
 		category.setParentId(parentId);
 		category.setIsParent(false);
+		category.setSortOrder(1);
+		category.setStatus(1);
 		int insert = contentCategoryMapper.insert(category);
 		
-		result = modifyParentStatus(parentId);
+		result = modifyParentStatus(parentId,category);
 		
 		return result;
 	}
 
-	private TaotaoResult modifyParentStatus(Long parentId) {
+	private TaotaoResult modifyParentStatus(Long parentId, TbContentCategory category2) {
 		TbContentCategoryExample categoryExample  = new TbContentCategoryExample();
 		Criteria criteria = categoryExample.createCriteria();
 		criteria.andIdEqualTo(parentId);
@@ -79,7 +80,7 @@ public class ItemContentCategoryServiceImpl implements IItemContentCategoryServi
 				 category.setIsParent(true);
 			 }
 			 contentCategoryMapper.updateByPrimaryKey(category);
-			 return TaotaoResult.ok();
+			 return TaotaoResult.ok(category);
 		}
 		return TaotaoResult.build(400, "不存在该类目!!!");
 	}
@@ -96,6 +97,36 @@ public class ItemContentCategoryServiceImpl implements IItemContentCategoryServi
 			return TaotaoResult.build(400, "同类目下不能存在同名分类!!!");
 		}
 		return TaotaoResult.ok();
+	}
+
+	@Override
+	public TaotaoResult deleteContentCategoryService(Long id) {
+		TbContentCategoryExample categoryExample  = new TbContentCategoryExample();
+		Criteria criteria = categoryExample.createCriteria();
+		criteria.andIdEqualTo(id);
+		
+		List<TbContentCategory> list = contentCategoryMapper.selectByExample(categoryExample);
+		
+		if(list==null || list.size() <0 ) {
+			return TaotaoResult.build(400, "不存在该节点，无法删除!!");
+		}
+		TbContentCategory category = list.get(0);
+		if(category.getIsParent()) {
+			deleteSonNode(category.getId());
+		}
+		contentCategoryMapper.deleteByPrimaryKey(id);
+		return TaotaoResult.ok();
+	}
+
+	private void deleteSonNode(Long id) {
+		
+		TbContentCategoryExample categoryExample = new TbContentCategoryExample();
+		Criteria criteria = categoryExample.createCriteria();
+		criteria.andParentIdEqualTo(id);
+		List<TbContentCategory> list = contentCategoryMapper.selectByExample(categoryExample);
+		for (TbContentCategory tbContentCategory : list) {
+			contentCategoryMapper.deleteByPrimaryKey(tbContentCategory.getId());
+		}
 	}
 
 }

@@ -14,27 +14,35 @@ import com.soul.common.pojo.TaotaoResult;
 import com.soul.service.IItemContentCategoryService;
 
 @Controller
-@RequestMapping("/content")
+@RequestMapping("/content/category")
 public class ItemContentCategoryController {
 	
 	
 	@Resource
 	private IItemContentCategoryService itemContentCategoryService;
 	
-	@RequestMapping("/category/list")
+	@RequestMapping("/list")
 	@ResponseBody
-	private List<EUTreeNode> getContentList(@RequestParam(value="id",defaultValue="0")Long parentId){
+	private List<EUTreeNode> getContentCategoryList(@RequestParam(value="id",defaultValue="0")Long parentId){
 		
 		List<EUTreeNode> catList = itemContentCategoryService.getContentList(parentId);
 		
 		return catList;
 	}
 	
-	@RequestMapping("/category/create")
+	@RequestMapping("/create")
 	@ResponseBody
-	public TaotaoResult createContent(String name,Long parentId) {
+	public TaotaoResult createContentCategory(String name,Long parentId) {
 		
 		TaotaoResult taotaoResult =  itemContentCategoryService.createContentCategoryService(name,parentId);
+		return taotaoResult;
+	}
+	
+	@RequestMapping("/delete")
+	@ResponseBody
+	public TaotaoResult deleteContentCategory(Long id) {
+		
+		TaotaoResult taotaoResult =  itemContentCategoryService.deleteContentCategoryService(id);
 		return taotaoResult;
 	}
 	

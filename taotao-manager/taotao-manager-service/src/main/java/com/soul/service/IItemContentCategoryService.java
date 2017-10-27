@@ -11,4 +11,6 @@ public interface IItemContentCategoryService {
 
 	TaotaoResult createContentCategoryService(String name, Long parentId);
 
+	TaotaoResult deleteContentCategoryService(Long id);
+
 }
