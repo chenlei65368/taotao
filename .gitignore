@@ -15,3 +15,5 @@ taotao-portal/.settings/org.eclipse.wst.common.project.facet.core.xml
 taotao-rest/.settings/org.eclipse.wst.common.project.facet.core.xml
 *.MF
 access_log.*
+*/.settings/*
+*/target/*
