@@ -25,4 +25,13 @@ public class ItemController {
 		
 		return taotaoResult;
 	}
+	
+	@RequestMapping("/param/{itemId}")
+	@ResponseBody
+	public TaotaoResult getItemParamInfo(@PathVariable Long itemId) {
+		
+		TaotaoResult taotaoResult = itemService.getItemParamInfo(itemId);
+		
+		return taotaoResult;
+	}
 }
