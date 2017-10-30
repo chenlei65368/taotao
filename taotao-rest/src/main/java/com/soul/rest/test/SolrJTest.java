@@ -3,11 +3,9 @@ package com.soul.rest.test;
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.impl.HttpSolrServer;
 import org.apache.solr.common.SolrInputDocument;
-import org.junit.Test;
 
 public class SolrJTest {
 
-	@Test
 	public void addDocument() throws Exception {
 		
 		SolrServer solrServer = new HttpSolrServer("http://192.168.152.155:8080/solr");
@@ -20,7 +18,6 @@ public class SolrJTest {
 		solrServer.commit();
 	}
 	
-	@Test
 	public void deleteDocument() throws Exception {
 		
 		SolrServer solrServer = new HttpSolrServer("http://192.168.152.155:8080/solr");
