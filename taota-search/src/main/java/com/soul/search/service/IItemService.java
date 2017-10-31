@@ -5,4 +5,5 @@ import com.soul.common.pojo.TaotaoResult;
 public interface IItemService {
 	
 	TaotaoResult importAllItems();
+	TaotaoResult addDocument(String itemInfo);
 }
