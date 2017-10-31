@@ -7,11 +7,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.soul.common.pojo.TaotaoResult;
 import com.soul.common.utils.ExceptionUtil;
 import com.soul.common.utils.JsonUtils;
+import com.soul.pojo.TbUser;
 import com.soul.sso.service.UserService;
 
 @Controller
@@ -21,7 +23,7 @@ public class UserController {
 	@Resource
 	private UserService userService;
 
-	@RequestMapping("/check/{param}/{type}")
+	@RequestMapping(value="/check/{param}/{type}",method=RequestMethod.POST)
 	@ResponseBody
 	public Object checkData(@PathVariable String param, @PathVariable Integer type, String callback) {
 
@@ -58,5 +60,72 @@ public class UserController {
 			return callback + "(" + JsonUtils.objectToJson(taotaoResult) + ");";
 		}
 
+	}
+	
+	
+	@RequestMapping(value="/register",method=RequestMethod.POST)
+	@ResponseBody
+	public TaotaoResult createUser(TbUser user) {
+		
+		try {
+			TaotaoResult taotaoResult = userService.createUser(user);
+			return taotaoResult;
+		}catch (Exception e) {
+			return TaotaoResult.build(500, ExceptionUtil.getStackTrace(e));
+		}
+	}
+	
+	@RequestMapping(value="/login",method=RequestMethod.POST)
+	@ResponseBody
+	public TaotaoResult login(TbUser user) {
+		try {
+			
+			TaotaoResult result = userService.userLogin(user.getUsername(), user.getPassword());
+			return result;
+		}catch (Exception e) {
+			
+			return TaotaoResult.build(500, ExceptionUtil.getStackTrace(e));
+		}
+	}
+	
+	@RequestMapping(value="/token/{token}",method=RequestMethod.GET)
+	@ResponseBody
+	public Object getToken(@PathVariable String token,String callback) {
+		
+		try {
+			TaotaoResult result = userService.getToken(token);
+			
+			if(StringUtils.isNotBlank(callback)) {
+				return callback+"("+JsonUtils.objectToJson(result)+");";
+			}
+			return result;
+			
+			
+		}catch (Exception e) {
+			if(StringUtils.isNotBlank(callback)) {
+				return callback+"("+JsonUtils.objectToJson( TaotaoResult.build(500, ExceptionUtil.getStackTrace(e)))+");";
+			}
+			return TaotaoResult.build(500, ExceptionUtil.getStackTrace(e));
+		}
+	}
+	@RequestMapping(value="/logout/{token}",method=RequestMethod.GET)
+	@ResponseBody
+	public Object logout(@PathVariable String token,String callback) {
+		
+		try {
+			TaotaoResult result = userService.logout(token);
+			
+			if(StringUtils.isNotBlank(callback)) {
+				return callback+"("+JsonUtils.objectToJson(result)+");";
+			}
+			return result;
+			
+			
+		}catch (Exception e) {
+			if(StringUtils.isNotBlank(callback)) {
+				return callback+"("+JsonUtils.objectToJson( TaotaoResult.build(500, ExceptionUtil.getStackTrace(e)))+");";
+			}
+			return TaotaoResult.build(500, ExceptionUtil.getStackTrace(e));
+		}
 	}
 }
