@@ -114,7 +114,7 @@ public class CartServiceImpl implements CartService {
 			//TODO 进不去if
 			for (CartItem cItem : itemList) {
 				
-				if( itemId == cItem.getId() ) {
+				if( itemId.equals(cItem.getId()) ) {
 					itemList.remove(cItem);
 					break;
 				}
