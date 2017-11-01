@@ -2,6 +2,8 @@ package com.soul.sso.controller;
 
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -23,7 +25,7 @@ public class UserController {
 	@Resource
 	private UserService userService;
 
-	@RequestMapping(value="/check/{param}/{type}",method=RequestMethod.POST)
+	@RequestMapping(value="/check/{param}/{type}",method=RequestMethod.GET)
 	@ResponseBody
 	public Object checkData(@PathVariable String param, @PathVariable Integer type, String callback) {
 
@@ -77,10 +79,10 @@ public class UserController {
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	@ResponseBody
-	public TaotaoResult login(TbUser user) {
+	public TaotaoResult login(TbUser user,HttpServletRequest request,HttpServletResponse response) {
 		try {
 			
-			TaotaoResult result = userService.userLogin(user.getUsername(), user.getPassword());
+			TaotaoResult result = userService.userLogin(user.getUsername(), user.getPassword(),request,response);
 			return result;
 		}catch (Exception e) {
 			
@@ -128,4 +130,6 @@ public class UserController {
 			return TaotaoResult.build(500, ExceptionUtil.getStackTrace(e));
 		}
 	}
+	
+	
 }
