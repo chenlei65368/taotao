@@ -45,7 +45,9 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public TaotaoResult createOrder(TbOrder order, List<TbOrderItem> itemList, TbOrderShipping orderShipping) {
-
+		
+		
+		
 		String string = jedisClient.get(ORDER_GEN_KEY);
 		if (StringUtils.isBlank(string)) {
 			jedisClient.set(ORDER_GEN_KEY, ORDER_INIT_ID);

@@ -1,6 +1,7 @@
 package com.soul.order.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import com.soul.common.pojo.TaotaoResult;
 import com.soul.common.utils.ExceptionUtil;
 import com.soul.order.pojo.Order;
 import com.soul.order.service.OrderService;
+import com.soul.pojo.TbUser;
 
 @Controller
 public class OrderController {
@@ -26,7 +28,7 @@ public class OrderController {
 	public TaotaoResult createOrder(@RequestBody Order order) {
 
 		try {
-
+			
 			TaotaoResult taotaoResult = orderService.createOrder(order, order.getOrderItems(),
 					order.getOrderShipping());
 			return taotaoResult;

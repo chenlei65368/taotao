@@ -29,6 +29,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 			return false;
 		}
 		
+		request.setAttribute("user", user);
 		return true;
 	}
 

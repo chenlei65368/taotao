@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.soul.pojo.TbUser;
 import com.soul.portal.pojo.CartItem;
 import com.soul.portal.pojo.Order;
 import com.soul.portal.service.CartService;
@@ -36,9 +37,12 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value="/create",method=RequestMethod.POST)
-	public String createOrder(Order order,Model model) {
+	public String createOrder(Order order,Model model,HttpServletRequest request) {
 		
 		try {
+			TbUser user = (TbUser) request.getAttribute("user");
+			order.setBuyerNick(user.getUsername());
+			order.setUserId(user.getId());
 			String result = orderService.createOrder(order);
 			model.addAttribute("orderId", result);
 			model.addAttribute("payment", order.getPayment());
