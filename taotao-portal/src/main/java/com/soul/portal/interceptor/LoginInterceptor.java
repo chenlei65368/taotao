@@ -25,7 +25,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 		String token = CookieUtils.getCookieValue(request, "TT_TOKEN");
 		TbUser user = userService.getUserByToken(token);
 		if(null == user) {
-			response.sendRedirect(userService.SSO_BASE_URL+userService.SSO_LOGIN_URL+"?redirect="+request.getRequestURL());
+			response.sendRedirect(userService.SSO_DOMAIN_BASE_URL+userService.SSO_LOGIN_URL+"?redirect="+request.getRequestURL());
 			return false;
 		}
 		

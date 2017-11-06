@@ -34,15 +34,15 @@
 	</bean>	
 	
 	<!-- jedis客户端单机版 -->
+	<!--  
 	<bean id="redisClient" class="redis.clients.jedis.JedisPool">
 		<constructor-arg name="host" value="${REDIS_SINGLENODE_IP}"></constructor-arg>
 		<constructor-arg name="port" value="6379"></constructor-arg>
 		<constructor-arg name="poolConfig" ref="jedisPoolConfig"></constructor-arg>
 	</bean>
 	<bean id="jedisClient" class="com.soul.rest.dao.impl.JedisClientSingle"></bean>
-	
+	-->
 	<!-- 集群版 -->
-	<!--  
 	<bean id="redisClient" class="redis.clients.jedis.JedisCluster">
 		<constructor-arg name="nodes">
 			<set>
@@ -74,7 +74,7 @@
 		</constructor-arg>
 		<constructor-arg name="poolConfig" ref="jedisPoolConfig"></constructor-arg>
 	</bean>
-	-->
+	<bean id="jedisClient" class="com.soul.rest.dao.impl.JedisClientCluster"></bean>
 
 
 	

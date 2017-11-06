@@ -62,6 +62,10 @@
 				<configuration>
 					<port>8184</port>
 					<path>/</path>
+					<url>http://192.168.152.157:8184/manager/text</url>
+					<server>tomcat7</server> 
+					<username>tomcat</username>
+					<password>tomcat</password>
 				</configuration>
 			</plugin>
 		</plugins>

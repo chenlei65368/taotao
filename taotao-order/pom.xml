@@ -61,6 +61,10 @@
 				<configuration>
 					<port>8185</port>
 					<path>/</path>
+					<url>http://192.168.152.157:8185/manager/text</url>
+					<server>tomcat7</server> 
+					<username>tomcat</username>
+					<password>tomcat</password>
 				</configuration>
 			</plugin>
 		</plugins>
