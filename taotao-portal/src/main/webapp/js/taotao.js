@@ -10,8 +10,9 @@ var TT = TAOTAO = {
 			type : "GET",
 			success : function(data){
 				if(data.status == 200){
+					alert(data.data.userId);
 					var username = data.data.username;
-					var html = username + "，欢迎来到淘淘！<a href=\"http://sso.taotao.com/user/logout.html\" class=\"link-logout\">[退出]</a>";
+					var html = username + "，欢迎来到淘淘！<a href=\"http://sso.taotao.com/user/logout/"+data.data.userId+"\" class=\"link-logout\">[退出]</a>";
 					$("#loginbar").html(html);
 				}
 			}
