@@ -67,7 +67,7 @@
 				<configuration>
 					<port>8181</port>
 					<path>/</path>
-					<url>http://192.168.152.138:8180/manager/text</url>
+					<url>http://192.168.152.138:8280/manager/text</url>
 					<server>tomcat7</server> 
 					<username>tomcat</username>
 					<password>tomcat</password>

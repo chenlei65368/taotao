@@ -111,24 +111,12 @@ public class UserController {
 		}
 	}
 	@RequestMapping(value="/logout/{token}",method=RequestMethod.GET)
-	@ResponseBody
-	public Object logout(@PathVariable String token,String callback) {
+	public String logout(@PathVariable String token) {
 		
-		try {
 			TaotaoResult result = userService.logout(token);
 			
-			if(StringUtils.isNotBlank(callback)) {
-				return callback+"("+JsonUtils.objectToJson(result)+");";
-			}
-			return result;
+			return "redirect:/page/login";
 			
-			
-		}catch (Exception e) {
-			if(StringUtils.isNotBlank(callback)) {
-				return callback+"("+JsonUtils.objectToJson( TaotaoResult.build(500, ExceptionUtil.getStackTrace(e)))+");";
-			}
-			return TaotaoResult.build(500, ExceptionUtil.getStackTrace(e));
-		}
 	}
 	
 	
