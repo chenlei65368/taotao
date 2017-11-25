@@ -5,8 +5,7 @@
     <artifactId>taotao-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>com.soul</groupId>
-  <artifactId>taotao-sso</artifactId>
+	<artifactId>taotao-sso</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   

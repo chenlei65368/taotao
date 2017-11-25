@@ -2,7 +2,6 @@ package com.soul.controller;
 
 import java.util.List;
 
-import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -16,7 +15,6 @@ import com.soul.pojo.TbItemExample.Criteria;
 public class TestPageHelper {
 
 	
-	@Test
 	public void testPageHelper() {
 		
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext*");
