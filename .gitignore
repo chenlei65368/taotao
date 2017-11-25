@@ -17,3 +17,4 @@ taotao-rest/.settings/org.eclipse.wst.common.project.facet.core.xml
 access_log.*
 **/.settings/**
 **/target/**
+**/.idea/**
